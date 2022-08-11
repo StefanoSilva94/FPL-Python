@@ -311,10 +311,41 @@ def countList(lst):
             count+= 1         
     return count
 
+'''
+this function looks at the header column of data and if your filter is present it will return only rows matching that value
+If filt = price it will only return players of that price or lower
+E.g.:
+filter on Position, wwith value = DEF
+'''
+def getDataByFilter(data, filt, value):
+    
+    header = data[0]
+    rows = data[1]
+    newRows = []
+    newRows.append(header)
+    newRows.append([])
+    
+    count = 0
+    for column in header:
+        if column.lower() != filt.lower():
+            count+=1
+        else:
+            break
+        
+    for row in rows:
+        if row[count].lower() == value.lower():
+            newRows[1].append(row)
+            
+  
+    return newRows
+    
+    
 
-# a = addExpPtsToData('1')
-# r.printDataFromArray(a, 'header')
-# r.printDataFromArray(a, 'rows')
+
+a = addPPMToData('1')
+# b = getDataByFilter(a,'Position','Def')
+# r.printDataFromArray(b, 'header')
+# r.printDataFromArray(b, 'rows')
 
 
         

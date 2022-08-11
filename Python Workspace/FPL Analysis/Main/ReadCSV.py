@@ -241,11 +241,27 @@ def getGoalOddsForPlayer(gData, name1):
     
     return goals
 
+'''
+This function has been edited to accomadte special cases where names have been spelt differently across spreadsheets:
+All EXCEPT BRYAN GIL are referred to by their second name
+name1 -> name2
+Ashley Young -> Young
+Cody Drameh -> Drameh
+Rúben Vinagre -> Vinagre
+Daniel Iversen -> Iversen
+Bryan Gil -> Bryan
+All other players are like for like name1 = name2
+
+Special elif clause for Bryan Gil, othere special cases use split(" ") to get their last name
+
+'''
 def getPlayerPositionAndPriceFromName(priceData, name1, team1):
     rows = priceData[1]
     name2 = ''
     team2 = ''
-    
+    names = name1.split(" ")
+    lastName = names[-1]
+
     i = 0
     while i < len(priceData[1]):
         # Assign name2 = name in the ith row
@@ -256,7 +272,16 @@ def getPlayerPositionAndPriceFromName(priceData, name1, team1):
          
         if name1 == name2 and team1 == team2:
             break
-    
+        # specific case needed since Bryan Gil is named differently in different spreadsheets
+        elif name1 == 'Bryan Gil' and name2 == 'Bryan' and team2 == 'TOT':
+            break
+        elif lastName == name2 and team1 == team2:
+            break
+
+            
+    if i == len(priceData[1]):
+        print(name1)
+
     price = rows[i-1][3]
     pos = rows[i-1][2]
     
@@ -274,9 +299,8 @@ Parray = getProbabilityData('Price', '1')
 
 # AandGarray = mergeAssistAndGoalData(Aarray, Garray)
 
-# csAssistGoalPrice = mergePriceToCSAssistAndGoalData(Aarray,Garray, CSarray,Parray )
+csAssistGoalPrice = mergePriceToCSAssistAndGoalData(Aarray,Garray, CSarray,Parray )
 
 
 # printDataFromArray(csAssistGoalPrice, 'header')
 # printDataFromArray(csAssistGoalPrice, 'rows')
-

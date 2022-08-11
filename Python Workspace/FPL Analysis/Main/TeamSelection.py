@@ -220,7 +220,7 @@ def findExpPtsAndPPMForCurrentSquad(managerId, gw):
                     player+=row[3:] 
                     squadStats.append(player) 
                     playersFound+=1
-
+    print(squadStats)
     return squadStats
     
     
