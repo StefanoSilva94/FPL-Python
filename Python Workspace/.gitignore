@@ -1,5 +1,5 @@
 /.metadata/
-*.DS_Store
+**/.DS_Store
 *.pydevproject
 .project
 *.metadata
@@ -14,5 +14,5 @@ local.properties
 .classpath
 .settings/
 .loadpath
-*__pycache__
+**/__pycache__
 __pycache__/
