@@ -67,19 +67,17 @@ def getProbabilityData(data, gw):
     # cwd = os.getcwd()  # Get the current working directory (cwd)
     # files = os.listdir(cwd)  # Get all the files in that directory
     # print("Files in %r: %s" % (cwd, files))
-
-    path = '/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/'
-    os.chdir(path)
+    os.chdir('..')
     if data == "Cleansheet":
-        newData = getDataFromCSV('Probability Data/'+data+' Data/CSV/GW'+gw+'.csv')
+        newData = getDataFromCSV(data+' Data/CSV/GW'+gw+'.csv')
         newData = updateCleanSheetOddsFromPercentToDec(newData)
         newData = changeTeamNameToAbbreviation(newData)
         newData = addGameweekToArray(newData, gw)
     elif data == 'Price':
-        newData = getDataFromCSV('Probability Data/'+data+' Data/CSV/Player Prices.csv')
+        newData = getDataFromCSV(data+' Data/CSV/Player Prices.csv')
         
     else:
-        newData = getDataFromCSV('Probability Data/'+data+' Data/CSV/GW'+gw+'.csv')
+        newData = getDataFromCSV(data+' Data/CSV/GW'+gw+'.csv')
         newData = addGameweekToArray(newData, gw)
     
     return newData

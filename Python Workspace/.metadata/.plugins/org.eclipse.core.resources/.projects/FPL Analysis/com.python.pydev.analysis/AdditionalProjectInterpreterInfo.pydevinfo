@@ -1,0 +1,68 @@
+-- VERSION_5
+-- START DISKCACHE_3
+/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/FPL Analysis/com.python.pydev.analysis/v2_indexcache
+Main.ExpPoints|1660211659577676000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/ExpPoints.py
+Main.FPL_APIs|1660149419667758000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/FPL_APIs.py
+Main.TeamSelection|1660211659560575000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/TeamSelection.py
+Main.ExpPointsTables|1660211635600802000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/ExpPointsTables.py
+Main.__init__|1660211594013531000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/__init__.py
+Main.ReadCSV|1660213273246153000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/ReadCSV.py
+Main.FPLDatabase|1660211683245392000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/FPLDatabase.py
+Main.CreateDatabaseAndTables|1660211659543471000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/CreateDatabaseAndTables.py
+Main.Test|1660052339423743000|/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/Test.py
+-- END DISKCACHE
+-- START DICTIONARY
+16
+15=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/FPLDatabase.py
+14=Main.FPL_APIs
+2=Main.TeamSelection
+5=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/CreateDatabaseAndTables.py
+10=Main.ExpPointsTables
+4=Main.ReadCSV
+16=Main.FPLDatabase
+11=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/Test.py
+8=Main.ExpPoints
+3=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/ReadCSV.py
+13=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/FPL_APIs.py
+1=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/TeamSelection.py
+9=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/ExpPointsTables.py
+6=Main.CreateDatabaseAndTables
+7=/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/Main/ExpPoints.py
+12=Main.Test
+-- END DICTIONARY
+-- START TREE 1
+30
+a|1|a!1^362#1*19@
+aar|1|Aarray!3^270#1*35@
+add|8|addGameweekToArray!3^128#5*34@addCleanSheetRowsToTable!5^55#5*50@addAssistRowsToTable!5^100#5*50@addPPMToData!7^41#5*66@addExpPtsColToTable!9^26#5*82@addPriceRowsToTable!5^148#5*50@addGoalRowsToTable!5^125#5*50@addExpPtsToData!7^19#5*66@
+ass|1|assistPts!7^79#5*66@
+b|1|b!1^380#5*19@
+cal|1|calculateExpPointsForRow!9^69#5*82@
+cha|1|changeTeamNameToAbbreviation!3^120#5*34@
+che|1|checkCols!5^42#5*50@
+cle|1|cleanSheetPts!7^67#5*66@
+con|1|convertPercentToDecimal!3^90#5*34@
+cou|2|countList!11^8#5*98@countList!1^354#5*18@
+cre|11|createExpPtSingleGWTable!9^80#5*82@createAssistTable!5^84#5*50@createeAss_CS_GoalsTable!5^193#5*50@createDatabase!5^27#5*50@createeAss_CSTable!5^179#5*50@createPlayerIDDict!13^74#5*114@createGoalsTable!5^110#5*50@createDB!15^10#5*130@createPriceTable!5^134#5*50@createTeamsDict!13^30#5*114@createeAss_CS_Goals_PriceTable!5^207#5*50@
+csa|1|CSarray!3^272#1*35@
+dro|1|dropTable!5^19#5*50@
+e|1|e!1^19#1*19@
+gar|1|Garray!3^271#1*35@
+get|12|getGoalScorerData!3^114#5*34@getMaxPlayerByColumn!1^35#5*18@getProbabilityData!3^66#5*34@getCSOddsForTeam!3^205#5*34@getGameweekData!7^56#5*66@getPlayerPositionAndPriceFromName!3^244#5*34@getAssistData!3^107#5*34@getManagerPlayers!13^15#5*114@getExpPtsOverMultGWs!1^76#5*18@getDataFromCSV!3^13#5*34@getGoalOddsForPlayer!3^224#5*34@getAllPlayerData!13^57#5*114@
+goa|1|goalPts!7^86#5*66@
+loa|1|loadDataForMissingGameWeeks!5^66#5*50@
+m|1|m!1^21#1*19@
+mer|5|mergeAssistAndGoalData!3^142#5*34@mergeSortedArrays!1^233#5*18@mergeCleanSheetToAssistAndGoalData!3^161#5*34@mergeSortArray!1^168#5*18@mergePriceToCSAssistAndGoalData!3^179#5*34@
+par|1|Parray!3^273#1*35@
+pic|1|pickTeam!1^27#5*18@
+pla|1|player!1^382#5*19@
+pri|2|printDataFromArray!3^56#5*34@printTable!5^161#5*50@
+r|2|r!1^20#1*19@r!7^8#1*67@
+run|1|runQuery!5^221#5*50@
+t|1|t!15^8#1*131@
+tea|1|teamNames!3^52#1*35@
+upd|3|updateCleanSheetOddsFromPercentToDec!3^99#5*34@updateExpPointsForEachRow!9^52#5*82@updateTable!5^234#5*50@
+-- END TREE
+-- START TREE 2
+0
+-- END TREE
