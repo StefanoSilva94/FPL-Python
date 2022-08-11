@@ -194,9 +194,10 @@
           <tags>persp.showIn:org.eclipse.ui.navigator.ProjectExplorer</tags>
           <tags>persp.showIn:org.eclipse.ui.views.ContentOutline</tags>
           <tags>persp.showIn:org.eclipse.tm.terminal.view.ui.TerminalsView</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_a_wNYRHKEe2dgOxb4_PtLQ" selectedElement="_a_wNZBHKEe2dgOxb4_PtLQ" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_a_wNYRHKEe2dgOxb4_PtLQ" selectedElement="_a_wNYhHKEe2dgOxb4_PtLQ" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_a_wNYhHKEe2dgOxb4_PtLQ" elementId="topLeft" containerData="2600" selectedElement="_a_wNYxHKEe2dgOxb4_PtLQ">
               <tags>noFocus</tags>
+              <tags>active</tags>
               <children xsi:type="advanced:Placeholder" xmi:id="_a_wNYxHKEe2dgOxb4_PtLQ" elementId="org.python.pydev.navigator.view" ref="_a_kAIBHKEe2dgOxb4_PtLQ" closeable="true">
                 <tags>View</tags>
                 <tags>categoryTag:PyDev</tags>
@@ -217,7 +218,6 @@
                 </children>
               </children>
               <children xsi:type="basic:PartStack" xmi:id="_a_wNahHKEe2dgOxb4_PtLQ" elementId="bottom" containerData="2500" selectedElement="_a_wNbBHKEe2dgOxb4_PtLQ">
-                <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_a_wNaxHKEe2dgOxb4_PtLQ" elementId="org.eclipse.search.ui.views.SearchView" toBeRendered="false" ref="_Q1jDMBHKEe2dgOxb4_PtLQ" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:General</tags>
@@ -342,8 +342,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
-      <tags>active</tags>
-      <tags>activeOnClose</tags>
       <menus xmi:id="_V6ixoBHLEe2dgOxb4_PtLQ" elementId="org.eclipse.ui.console.ConsoleView">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -413,9 +411,11 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_a_kAIBHKEe2dgOxb4_PtLQ" elementId="org.python.pydev.navigator.view" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="PyDev Package Explorer" iconURI="platform:/plugin/org.python.pydev.shared_ui/icons/pydev_package_explorer.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewClass" value="org.python.pydev.navigator.ui.PydevPackageExplorer"/>
       <persistedState key="originalCompatibilityViewBundle" value="org.python.pydev"/>
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xA;&lt;expanded IMemento.internal.id=&quot;/Users/stefanosilva/Desktop/Python Workspace/Test&quot;/>&#xA;&lt;lastRecentlyUsedFilters/>&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1659383194962&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xA;&lt;lastRecentlyUsedFilters/>&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:PyDev</tags>
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
       <menus xmi:id="_bAzWQBHKEe2dgOxb4_PtLQ" elementId="org.python.pydev.navigator.view">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -429,7 +429,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_QekGkBHKEe2dgOxb4_PtLQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_QevswBHKEe2dgOxb4_PtLQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_PmiSZxHKEe2dgOxb4_PtLQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1f1RoBlQEe2FeqLfiPfMaQ" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_PmiSZxHKEe2dgOxb4_PtLQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_QektoBHKEe2dgOxb4_PtLQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -460,7 +460,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Qel7wBHKEe2dgOxb4_PtLQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_QeyJABHKEe2dgOxb4_PtLQ" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_PmhERhHKEe2dgOxb4_PtLQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1f7YQBlQEe2FeqLfiPfMaQ" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_PmhERhHKEe2dgOxb4_PtLQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Qel7wRHKEe2dgOxb4_PtLQ" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1122,7 +1122,7 @@
     <bindings xmi:id="_PoQJqBHKEe2dgOxb4_PtLQ" keySequence="ALT+CR" command="_PmeA-xHKEe2dgOxb4_PtLQ"/>
   </bindingTables>
   <bindingTables xmi:id="_PwWVsRHKEe2dgOxb4_PtLQ" contributorURI="platform:/fragment/org.eclipse.e4.ui.workbench.renderers.swt.cocoa" bindingContext="_PlWmoRHKEe2dgOxb4_PtLQ">
-    <bindings xmi:id="_PwWVshHKEe2dgOxb4_PtLQ" keySequence="M1+W" command="_PwVuoBHKEe2dgOxb4_PtLQ"/>
+    <bindings xmi:id="_1LTMEBlQEe2FeqLfiPfMaQ" keySequence="M1+W" command="_PwVuoBHKEe2dgOxb4_PtLQ"/>
   </bindingTables>
   <bindingTables xmi:id="_Q1NsARHKEe2dgOxb4_PtLQ" bindingContext="_Q1NsABHKEe2dgOxb4_PtLQ"/>
   <bindingTables xmi:id="_Q1NsAxHKEe2dgOxb4_PtLQ" bindingContext="_Q1NsAhHKEe2dgOxb4_PtLQ"/>
@@ -2648,7 +2648,7 @@
   <addons xmi:id="_PlWmqhHKEe2dgOxb4_PtLQ" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_PlWmqxHKEe2dgOxb4_PtLQ" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_PlhlwBHKEe2dgOxb4_PtLQ" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_1K4VURlQEe2FeqLfiPfMaQ" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <addons xmi:id="_PwTSYBHKEe2dgOxb4_PtLQ" elementId="org.eclipse.e4.ui.workbench.renderers.swt.cocoa.CocoaUIHandler" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.cocoa.CocoaUIHandler"/>
   <categories xmi:id="_PmPXcBHKEe2dgOxb4_PtLQ" elementId="org.eclipse.team.ui.category.team" name="Version control (Team)" description="Actions that apply when working with a version control system"/>
