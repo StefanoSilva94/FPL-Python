@@ -2,7 +2,7 @@
 *.DS_Store
 *.pydevproject
 .project
-.metadata
+*.metadata
 bin/**
 tmp/**
 tmp/**/*
