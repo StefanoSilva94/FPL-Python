@@ -5,6 +5,7 @@ price, CS, goals, assist and gw data into one array
 @author: stefanosilva
 '''
 import csv
+import os
 
 '''This will read the data from a csv and return two values:
 header - an array containg the header values
@@ -67,6 +68,8 @@ def getProbabilityData(data, gw):
     # files = os.listdir(cwd)  # Get all the files in that directory
     # print("Files in %r: %s" % (cwd, files))
 
+    path = '/Users/stefanosilva/Documents/GitHub/FPL-Python/Python Workspace/FPL Analysis/'
+    os.chdir(path)
     if data == "Cleansheet":
         newData = getDataFromCSV(data+' Data/CSV/GW'+gw+'.csv')
         newData = updateCleanSheetOddsFromPercentToDec(newData)

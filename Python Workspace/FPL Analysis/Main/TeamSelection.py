@@ -10,9 +10,9 @@ It also returns data with the row for the max player removed
 @author: stefanosilva
 '''
 
-import ExpPoints
-import ReadCSV
-import FPL_APIs
+from Main import ExpPoints
+from Main import ReadCSV
+from Main import FPL_APIs
 import math
 
 

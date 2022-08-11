@@ -4,7 +4,7 @@ This module takes an array containing assist, goal and cleansheet odds for each 
 calculates the expPoints for each player that week
 @author: stefanosilva
 '''
-import ReadCSV
+from Main import ReadCSV
 r = ReadCSV
 
 

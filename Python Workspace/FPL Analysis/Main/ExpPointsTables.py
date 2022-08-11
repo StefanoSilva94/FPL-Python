@@ -7,7 +7,7 @@ Created on 3 Aug 2022
 
 @author: stefanosilva
 '''
-import CreateDatabaseAndTables as cdt
+from Main import CreateDatabaseAndTables as cdt
 import sqlite3
 
 

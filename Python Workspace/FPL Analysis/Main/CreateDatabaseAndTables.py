@@ -12,7 +12,7 @@ e.g. FPL Analysis/Goal Data/CSV/GWX (X Denotes gameweek number)
 @author: stefanosilva
 '''
 import sqlite3
-import ReadCSV
+from Main import ReadCSV
 
 
 
