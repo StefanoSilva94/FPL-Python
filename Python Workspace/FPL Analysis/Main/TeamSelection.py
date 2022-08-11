@@ -21,7 +21,7 @@ from Main import ReadCSV
 from Main import FPL_APIs
 import math
 
-
+f = FPL_APIs
 d = DataTransformation
 r = ReadCSV
 m = math
@@ -171,6 +171,9 @@ that have a better ppm over the next 4 gameweeks at those players combine price 
 
 '''
 def recommendTransfers(numTransfers, gw):
+    '''
+    Adding comment to test feature branch
+    '''
     transfer = []
     currentTeam  = FPL_APIs.getManagerPlayers('3632826', gw - 1)
     if numTransfers == 1:
@@ -178,14 +181,59 @@ def recommendTransfers(numTransfers, gw):
     
     return transfer
 
+'''
+Use data from 4 future gws. E.g.:
+Assume most recent gameweek is input. 
+If gw = 1, we want to find the expPts and PPM from gw2 - g4 (inclusive)
+Add this for each player in current squad
+Squad contains an array that holds the name and team of a player in the managers squad for the specified gameweek
+Player represents each element of squad
 
-a = getExpPtsOverMultGWs(2,5)
+'''
+def findExpPtsAndPPMForCurrentSquad(managerId, gw):
+    # Returns an array containing [name, team]
+    squad = f.getManagerPlayers(managerId,gw)
+    '''
+    squad = [[Ward, LEI],...]
+    '''
+    squadStats = []
+    expDataOverFourGWs = getExpPtsOverMultGWs(int(gw) + 1, int(gw) + 4)
+    squadStats.append(['Name', 'Team', 'Cost', 'Position', 'ExpPts', 'PPM']) # Adding header
+    
+    playersFound = 0
+    for row in expDataOverFourGWs[1]:
+        if playersFound == 14: # If all players are found end the loop
+            break
+        else:
+            name1 = row[1]
+            team1 = row[2]
+    
+            for player in squad:
+                name2 = player[0]
+                team2 = player[1]
+                if name1 == name2 and team1 == team2: # Check if player is in our squad
+                    ''' 
+                    player = [name, team]
+                    row[3:] [Cost, Position, ExpPts, PPM]
+                    player = [Name, Team, Cost, Position, ExpPts, PPM]
+                    '''
+                    player+=row[3:] 
+                    squadStats.append(player) 
+                    playersFound+=1
 
-for i in range (0,10):
-    b = getMaxPlayerByColumn(a, 'exppts')
-    a = b[0]
-    player = b[1]
-    print(player)
+    return squadStats
+    
+    
+
+findExpPtsAndPPMForCurrentSquad('3632826', '1')
+
+# a = getExpPtsOverMultGWs(2,5)
+#
+# for i in range (0,10):
+#     b = getMaxPlayerByColumn(a, 'exppts')
+#     a = b[0]
+#     player = b[1]
+#     print(player)
 
 
 

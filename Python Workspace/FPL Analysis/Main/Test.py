@@ -13,6 +13,5 @@ def countList(lst):
     return count
     
         
-
-for i in range(0,40,5):
-    print(i)
+a = [1,2,3,4,5]
+print(a[2:])

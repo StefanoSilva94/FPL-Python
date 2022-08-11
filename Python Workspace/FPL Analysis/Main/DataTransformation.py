@@ -8,6 +8,7 @@ Any functions that output data directly useful for the end user are stored in te
 '''
 from Main import ReadCSV
 import math
+
 r = ReadCSV
 m = math
 
@@ -293,6 +294,8 @@ def mergeSortedArrays(a,b):
                 out.append(b[j])
          
     return out
+
+        
 
 
 '''
