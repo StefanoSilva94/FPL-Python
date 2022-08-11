@@ -9,6 +9,8 @@ import requests
 '''
 This will take a managers ID and for a specified gameweek and will return an array squad
 containing the players chosen by the manager for that gameweek and the FPL Team Per GW API
+e.g.:
+[[Ward, LEI], [Rpbertson, LIV],...,[Jesus, ARS]]
 '''
 
 
@@ -24,7 +26,6 @@ def getManagerPlayers(managerId, gw):
         squad.append(allPlayersDict[playerInfo])
         
     
-    # print(squad)  
     return squad
 
 def createTeamsDict():
@@ -92,6 +93,6 @@ def createPlayerIDDict():
     return playerKey
 
 
-# getManagerPlayers('3632826','1')
+getManagerPlayers('3632826','1')
 
 

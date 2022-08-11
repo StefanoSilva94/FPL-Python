@@ -1,37 +1,33 @@
 '''
 Created on 5 Aug 2022
 -This module is to pick the best team over the specified number of gameweeks
--Then use 
+-*The aim is to recommend a list of potential transfers by working out the expPts 
+for each player on your team and then comparing them to players at similar price points.
+-*If two transfers are available than it will compare players in that position 
+of the combined price of both players. d.g.:
+If Robertson (Def, £7), Martinelli (Mid, £6) are the lowest exp scoring combo I want to find the
+combination of a Def and Mid that will out score them for a price of £13
 -Key functions:
 i) getExpPtsOverMultGWs(startGW, endGW) is used to get a dataset of each players cumulative points over the specified gameweeks
 that is sorted by Name alphabetically
-ii) getMaxPlayerByColumn(data, column) to get the player with the most expected points/ppm that gameweek range. 
+ii) getMaxPlayerByColumn(data, column) to get the player with the most expected points/ppm that gameweek rangd. 
 It also returns data with the row for the max player removed
+
 @author: stefanosilva
 '''
 
-from Main import ExpPoints
+from Main import DataTransformation
 from Main import ReadCSV
 from Main import FPL_APIs
 import math
 
 
-e = ExpPoints
+d = DataTransformation
 r = ReadCSV
 m = math
 
-'''This is used to get all the player data in a 2d list for a specified gameweek
-It contains extra columns that aren't needed in the final view,e.g.:
-Fixture, eAss, eGoals, CS%, ...
-'''
-def pickTeam(gw):
-    
-    data = e.addPPMToData(gw)
-    
-    return data
 
-
-# Locates the player with the highest player of the specified column (e.g.price or PPM or expPts) and then returns that player 
+# Locates the player with the highest player of the specified column (d.g.price or PPM or expPts) and then returns that player 
 def getMaxPlayerByColumn(data, column):
     
     '''
@@ -73,9 +69,15 @@ def getMaxPlayerByColumn(data, column):
     return (data, player)
 
 
+
+'''
+Want to update this function:
+-add another column to filter by position - return only players of that position
+-sort final data by ppm and return max 50 rows
+'''
 def getExpPtsOverMultGWs(startGW, endGW):
     
-    # e.g.: gw 1- gw5
+    # d.g.: gw 1- gw5
     
     ''' 
     -this should use  pickTeam(gw) for each gameweek and store them in an array
@@ -88,12 +90,12 @@ def getExpPtsOverMultGWs(startGW, endGW):
     
     # Combining all gameweek data into one array and removing the header
     for i in range(startGW,endGW+1):
-        temp = pickTeam(str(i))
+        temp = d.addPPMToData(str(i))
         temp = temp[1]
         data = data + temp
 
     sumPts = []
-    data = mergeSortArray(data)
+    data = d.mergeSortArray(data)
 
 
     '''
@@ -107,7 +109,7 @@ def getExpPtsOverMultGWs(startGW, endGW):
     expPts
     ppM: Total expPts / price
     to an array called row
-    e.g. 
+    d.g. 
     James, CHE
     James,CHE
         
@@ -157,225 +159,28 @@ def getExpPtsOverMultGWs(startGW, endGW):
     
     return out
  
- 
-'''
-This sorts the data by name alphabetically, if two names are the same it should consider the 
-team as well. The other columns in the row will need to be moved in the same order as the name.
-It is an adapted merge sort algorithm 
-NOTE: l = 3 clause might be redundant but was useful in helping to visualise the logic of the merge sort
-'''   
-
-def mergeSortArray(data):
-    '''
-    needs to have no header row
-    takes an array of arrays, last value is price, sort by price
-    r1 = [1,'Adams', 'TOT', '(H): SOU', '0.33', '0.28', 0.44, '4.0', 'DEF','6.43']
-    r2 = [1, 'Adams', 'BOU', '(H): LIV', '0.33', '0.28', 0.44, '4.0', 'DEF','8.47']
-    data = (r1,r2)
-    
-    a= r1, b= r2
-    
-    if data = (r1,r2,r3):
-    split data into data1 = (r1,r2)
-    
-    '''
-    out = []
-
-    # length of a and b should be the same
-    l = len(data) 
-    
-    '''
-    sorting 2 arrays alphabetically by name, if names are the same check team
-    a[1] = name, b[1] = name
-    a[2] = team, b[2] = team
-    '''
-    if l == 2:
-        a = data[0]
-        b = data[1]
-        if a[1] < b[1]:
-            out.append(a)
-            out.append(b)
-        elif a[1] > b[1]:
-            out.append(b)
-            out.append(a)
-        else:
-            if a[2] < b[2]:
-                out.append(a)
-                out.append(b)
-            else:
-                out.append(b)
-                out.append(a)
-                
-    elif l == 3:
-
-        r1 = data[:2]  
-        r2 = data[2]
-        r3 = mergeSortArray(r1)  
-        
-        out = mergeSortedArrays(r3, r2)
-    
-    else:
-        ''' 
-        [r1,r2,r3,r4,r5] --> a = [r1,r2] b = [r1,r2,r3]
-        c = mergeSort(a) d = mergeSort(b)
-        out = mergeSortedArray(c,d)
-        '''
-        mid = m.floor(l/2)
-        a = data[:mid]
-        b = data[mid:]
-        c = mergeSortArray(a)
-        d = mergeSortArray(b)
-        
-        out = mergeSortedArrays(c, d)
-    return out
-        
-
-def mergeSortedArrays(a,b):
-    '''
-    This takes two already sorted arrays, merges them into tone sorted array
-    
-    r1 = [1,'Adams', 'TOT', '(H): SOU', '0.33', '0.28', 0.44, '4.0', 'DEF','6.43']
-    r2 = [1,'Kane', 'TOT', '(H): SOU', '0.33', '0.28', 0.44, '4.0', 'DEF','6.43']
-    r3 = [1, 'Adams', 'BOU', '(H): LIV', '0.33', '0.28', 0.44, '4.0', 'DEF','8.47']
-    
-    a = (r1,r2), b = r3
-    out = (r3,r1,r2)
-    
-        
-    '''
-    out = []
-    i = j = 0
-    if countList(a) == 0 and countList(b) == 0:
-        if a[1] < b[1]:
-            out.append(a)
-            out.append(b)
-        elif b[1] < a[1]:
-            out.append(b)
-            out.append(a)
-        else:
-            if a[2] < b[2]:
-                out.append(a)
-                out.append(b)
-            else:
-                out.append(b)
-                out.append(a)
-    
-    elif countList(b) == 0:
-
-        while i < len(a) and j < 1:
-
-            if a[i][1] < b[1]:
-
-                out.append(a[i])
-                i+=1
-            elif a[i][1] > b[1]:
-                out.append(b)
-                j+=1
-            else:
-                if a[i][2]  < b[2]:
-                    out.append(a[i])
-                    i+=1  
-                else:
-                    out.append(b)
-                    j+=1
-              
-        if i < len(a):
-            for i in range(i,len(a)):
-                out.append(a[i])
-
-                       
-        if j < 1:
-            out.append(b)
-                    
-        
-                    
-    elif countList(a) == 0:
-
-        while i < 1 and j < len(b):     
-
-            if a[1] < b[i][1]:
-                out.append(a)
-                i+=1
-            elif a[1] > b[i][1]:
-                out.append(b)
-                j+=1
-            else:
-                if a[2]  < b[i][2]:
-                    out.append(a)
-                    i+=1  
-                else:
-                    out.append(b[i])
-                    j+=1  
-                    
-        if i < 1:
-            out.append(a)
-                     
-        if j < len(b):
-            for k in range(j,len(b)):
-                out.append(b[k])                  
-                    
-    else:
-
-        while i < len(a) and j < len(b):     
-        
-            if a[i][1] < b[j][1]:
-                out.append(a[i])
-                i+=1
-            elif a[i][1] > b[j][1]:
-                out.append(b[j])
-                j+=1
-            else:
-                if a[i][2]  < b[j][2]:
-                    out.append(a[i])
-                    i+=1  
-                else:
-                    out.append(b[j])
-                    j+=1
-        
-    
-        if i < len(a):
-            for i in range(i,len(a)):
-                out.append(a[i])
-            
-            
-        if j < len(b):
-            for j in range(j,len(b)):
-                out.append(b[j])
-         
-    return out
 
 
 '''
-countList is used because len(List) was not useful when counting 1D Lists
-e.g.
-len [1,2,3,4] -> 4 (but desired answer is 1)
-len [[1,2,3,4],[5,6,7,8]] -> 2
+gw is the gameweek you want to make transfers for
+numTransfers = number of transfers available
+if numTransfers = 1, then it will look at the player with the lowest ppm and return all players 
+that have a better ppm over the next 4 gameweeks at the players price or less and players position
+if numTransfers = 2, then it will look at the 2 player with the lowest ppm and return all players 
+that have a better ppm over the next 4 gameweeks at those players combine price in their positions
+
 '''
-def countList(lst):
-    count = 0
-    for el in lst:
-        if type(el)== type([]):
-            count+= 1         
-    return count
+def recommendTransfers(numTransfers, gw):
+    transfer = []
+    currentTeam  = FPL_APIs.getManagerPlayers('3632826', gw - 1)
+    if numTransfers == 1:
+        currentTeam = []
+    
+    return transfer
 
 
 a = getExpPtsOverMultGWs(2,5)
-# a = pickTeam('2')
-# a = a[1]
-# b = mergeSortArray(a)
 
-
-
-# for i in range(0,100):
-#     b = getMaxPlayerByColumn(a,'exppts')
-#     print(b)
-#     c = []
-#     d = []
-#     c = a[1].remove(b)
-#     d.append(a[0])
-#     d.append(a[1])
-#     a = d
-    
 for i in range (0,10):
     b = getMaxPlayerByColumn(a, 'exppts')
     a = b[0]
