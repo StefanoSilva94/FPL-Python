@@ -94,6 +94,5 @@ def createPlayerIDDict():
     return playerKey
 
 
-# getManagerPlayers('3632826','1')
-
+a = getManagerPlayers('3632826','1')
 

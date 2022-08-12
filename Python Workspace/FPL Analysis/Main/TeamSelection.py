@@ -171,14 +171,12 @@ that have a better ppm over the next 4 gameweeks at those players combine price 
 
 '''
 def recommendTransfers(numTransfers, gw):
-    '''
-    Adding comment to test feature branch
-    '''
     transfer = []
-    currentTeam  = FPL_APIs.getManagerPlayers('3632826', gw - 1)
+    currentTeam  = findExpPtsAndPPMForCurrentSquad('3632826', gw - 1)[1:]
     if numTransfers == 1:
-        currentTeam = []
-    
+        for playerStats in currentTeam:
+            plExpPts = playerStats[4]
+
     return transfer
 
 '''
@@ -220,19 +218,19 @@ def findExpPtsAndPPMForCurrentSquad(managerId, gw):
                     player+=row[3:] 
                     squadStats.append(player) 
                     playersFound+=1
-    print(squadStats)
     return squadStats
     
     
 
-findExpPtsAndPPMForCurrentSquad('3632826', '1')
-
-# a = getExpPtsOverMultGWs(2,5)
-#
-# for i in range (0,10):
-#     b = getMaxPlayerByColumn(a, 'exppts')
-#     a = b[0]
-#     player = b[1]
+h = findExpPtsAndPPMForCurrentSquad('3632826', '1')
+print(h)
+# a = getExpPtsOverMultGWs(1,5)
+# b = d.getDataByFilter(a, 'Position', 'mid')
+# r.printDataFromArray(h, 'rows')
+# for i in range (0,20):
+#     c = getMaxPlayerByColumn(b, 'ppm')
+#     b = c[0]
+#     player = c[1]
 #     print(player)
 
 
