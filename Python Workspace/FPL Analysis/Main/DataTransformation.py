@@ -334,8 +334,10 @@ def getDataByFilter(data, filt, value):
             break
         
     if filt.lower() == 'price' or filt.lower() == 'cost':
+        
         for row in rows:
-            if row[count] <= value:
+            if float(row[count]) <= float(value):
+
                 newRows[1].append(row)
     else:
         # if the value in row matches the input value add that row to newRow  
@@ -349,11 +351,11 @@ def getDataByFilter(data, filt, value):
     
 
 
-a = addPPMToData('1')
-b = getDataByFilter(a,'position','GKP')
-b = getDataByFilter(b,'Cost','5.0')
+# a = addPPMToData('1')
+# b = getDataByFilter(a,'position','Mid')
+# b = getDataByFilter(b,'Cost','5.0')
 # r.printDataFromArray(b, 'header')
-r.printDataFromArray(b, 'rows')
+# r.printDataFromArray(b, 'rows')
 
 
         

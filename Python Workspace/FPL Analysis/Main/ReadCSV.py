@@ -278,9 +278,6 @@ def getPlayerPositionAndPriceFromName(priceData, name1, team1):
         elif lastName == name2 and team1 == team2:
             break
 
-            
-    if i == len(priceData[1]):
-        print(name1)
 
     price = rows[i-1][3]
     pos = rows[i-1][2]

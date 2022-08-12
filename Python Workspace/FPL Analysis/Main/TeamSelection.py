@@ -172,12 +172,45 @@ that have a better ppm over the next 4 gameweeks at those players combine price 
 '''
 def recommendTransfers(numTransfers, gw):
     transfer = []
-    currentTeam  = findExpPtsAndPPMForCurrentSquad('3632826', gw - 1)[1:]
+    currentTeam  = findExpPtsAndPPMForCurrentSquad('3632826', str(gw - 1))[1:]
+    # get data over 4 week range
+    startGW = gw + 1; endGW = gw + 4
+    data = getExpPtsOverMultGWs(startGW, endGW)
     if numTransfers == 1:
         for playerStats in currentTeam:
-            plExpPts = playerStats[4]
+            print(playerStats[0])
+            print(comparePlayer(playerStats, data))
 
     return transfer
+
+'''
+This will look at a player in my squads stats and compare to it players in data that are the same position 
+and same price or less that will outscore the player
+'''
+def comparePlayer(player, data):
+    cost = player[2]
+    pos = player[3]
+    expPts = player[4]
+    posData = d.getDataByFilter(data, 'Position', pos)
+    posAndCostData = d.getDataByFilter(posData, 'Cost', cost)
+    # print(posAndCostData[1])    
+
+    transfers = []
+    
+    for i in range(0,5):
+        maxPlayer = getMaxPlayerByColumn(posAndCostData, 'expPts')[1]
+        posAndCostData = getMaxPlayerByColumn(posAndCostData, 'expPts')[0]
+        maxPlayerExpPts = maxPlayer[5]
+    
+        if maxPlayerExpPts > expPts:
+            transfers.append(maxPlayer)
+        else:
+            # print(transfers)
+            return transfers
+        
+ 
+    # print(transfers)
+    return transfers
 
 '''
 Use data from 4 future gws. E.g.:
@@ -220,10 +253,12 @@ def findExpPtsAndPPMForCurrentSquad(managerId, gw):
                     playersFound+=1
     return squadStats
     
-    
-
-h = findExpPtsAndPPMForCurrentSquad('3632826', '1')
-print(h)
+recommendTransfers(1, 2)    
+# player = ['Bailey', 'AVL', '5.0', 'MID', 14.9, 2.98]
+# data = getExpPtsOverMultGWs(2, 5)
+# comparePlayer(player, data)
+# h = findExpPtsAndPPMForCurrentSquad('3632826', '1')
+# print(h)
 # a = getExpPtsOverMultGWs(1,5)
 # b = d.getDataByFilter(a, 'Position', 'mid')
 # r.printDataFromArray(h, 'rows')
@@ -231,7 +266,7 @@ print(h)
 #     c = getMaxPlayerByColumn(b, 'ppm')
 #     b = c[0]
 #     player = c[1]
-#     print(player)
+#     print(player)[[
 
 
 
