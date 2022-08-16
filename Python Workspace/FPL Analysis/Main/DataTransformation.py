@@ -7,11 +7,12 @@ Any functions that output data directly useful for the end user are stored in te
 @author: stefanosilva
 '''
 from Main import ReadCSV
+
 import math
+
 
 r = ReadCSV
 m = math
-
 '''
 def/gk = 4*CS
 mid = CS
@@ -351,12 +352,12 @@ def getDataByFilter(data, filt, value):
     
 
 
-# a = addPPMToData('1')
+# a = addPPMToData('4')
 # b = getDataByFilter(a,'position','Mid')
 # b = getDataByFilter(b,'Cost','5.0')
 # r.printDataFromArray(b, 'header')
 # r.printDataFromArray(b, 'rows')
-
+# print(b)
 
         
         

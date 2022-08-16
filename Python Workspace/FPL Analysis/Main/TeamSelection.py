@@ -172,15 +172,28 @@ that have a better ppm over the next 4 gameweeks at those players combine price 
 '''
 def recommendTransfers(numTransfers, gw):
     transfer = []
-    currentTeam  = findExpPtsAndPPMForCurrentSquad('3632826', str(gw - 1))[1:]
+    currentTeam  = findExpPtsAndPPMForCurrentSquad('3632826', str(gw))[1:]
     # get data over 4 week range
-    startGW = gw + 1; endGW = gw + 4
+    startGW = gw; endGW = gw + 3
     data = getExpPtsOverMultGWs(startGW, endGW)
     if numTransfers == 1:
         for playerStats in currentTeam:
-            print(playerStats[0])
-            print(comparePlayer(playerStats, data))
-
+            if playerStats[3] == 'GKP':
+                print("NAY IVERSON")
+                print('')
+                
+            else:
+                print(playerStats[0] + ' has expPts = ' + str(playerStats[4]) + ' over the next four gameweeks')
+                a = comparePlayer(playerStats, data)
+                if a == []:
+                    print('No player is expected to outperform ' + playerStats[0] + 
+                          ' that is within their price range ')
+                    print('')
+                else:
+                    print(a)
+                    print('')
+       
+        
     return transfer
 
 '''
@@ -193,23 +206,23 @@ def comparePlayer(player, data):
     expPts = player[4]
     posData = d.getDataByFilter(data, 'Position', pos)
     posAndCostData = d.getDataByFilter(posData, 'Cost', cost)
-    # print(posAndCostData[1])    
+    # print(posAndCostData[0])
 
     transfers = []
     
-    for i in range(0,5):
+    i = 0
+    while i < 5:
         maxPlayer = getMaxPlayerByColumn(posAndCostData, 'expPts')[1]
         posAndCostData = getMaxPlayerByColumn(posAndCostData, 'expPts')[0]
+        
         maxPlayerExpPts = maxPlayer[5]
     
         if maxPlayerExpPts > expPts:
             transfers.append(maxPlayer)
+            i+=1
         else:
-            # print(transfers)
             return transfers
         
- 
-    # print(transfers)
     return transfers
 
 '''
@@ -223,12 +236,12 @@ Player represents each element of squad
 '''
 def findExpPtsAndPPMForCurrentSquad(managerId, gw):
     # Returns an array containing [name, team]
-    squad = f.getManagerPlayers(managerId,gw)
+    squad = f.getManagerPlayers(managerId,int(gw) - 1)
     '''
     squad = [[Ward, LEI],...]
     '''
     squadStats = []
-    expDataOverFourGWs = getExpPtsOverMultGWs(int(gw) + 1, int(gw) + 4)
+    expDataOverFourGWs = getExpPtsOverMultGWs(int(gw), int(gw) + 3)
     squadStats.append(['Name', 'Team', 'Cost', 'Position', 'ExpPts', 'PPM']) # Adding header
     
     playersFound = 0
@@ -253,20 +266,20 @@ def findExpPtsAndPPMForCurrentSquad(managerId, gw):
                     playersFound+=1
     return squadStats
     
-recommendTransfers(1, 2)    
-# player = ['Bailey', 'AVL', '5.0', 'MID', 14.9, 2.98]
-# data = getExpPtsOverMultGWs(2, 5)
-# comparePlayer(player, data)
-# h = findExpPtsAndPPMForCurrentSquad('3632826', '1')
-# print(h)
-# a = getExpPtsOverMultGWs(1,5)
-# b = d.getDataByFilter(a, 'Position', 'mid')
-# r.printDataFromArray(h, 'rows')
-# for i in range (0,20):
-#     c = getMaxPlayerByColumn(b, 'ppm')
-#     b = c[0]
-#     player = c[1]
-#     print(player)[[
+    
+# recommendTransfers(1,3)    
+a = getExpPtsOverMultGWs(1,4)
+gkp = d.getDataByFilter(a,'position','GKP'); maxG =[]
+defender = d.getDataByFilter(a,'position','def'); maxD = []
+mid = d.getDataByFilter(a,'position','Mid'); maxM = []
+fwd = d.getDataByFilter(a,'position','fwd'); maxF = []
 
 
-
+for i in range(0,5):
+    maxG.append(getMaxPlayerByColumn(gkp, 'ppm')[1])
+    maxD.append(getMaxPlayerByColumn(defender, 'ppm')[1])
+    maxM.append(getMaxPlayerByColumn(mid, 'ppm')[1])
+    maxF.append(getMaxPlayerByColumn(fwd, 'ppm')[1])
+    
+    
+print(maxF[2])

@@ -234,7 +234,9 @@ def getGoalOddsForPlayer(gData, name1):
     
     if name1 == name2:  
         goals = rows[i-1][4]
+
     else:
+
         print("couldn't find name on list")
         goals = 0
 
@@ -289,15 +291,15 @@ def getPlayerPositionAndPriceFromName(priceData, name1, team1):
     
     return priceAndPos
 
-Aarray = getProbabilityData('Assist', '1')
-Garray = getProbabilityData('Goal', '1')
-CSarray = getProbabilityData('Cleansheet', '1')
+Aarray = getProbabilityData('Assist', '3')
+Garray = getProbabilityData('Goal', '3')
+CSarray = getProbabilityData('Cleansheet', '3')
 Parray = getProbabilityData('Price', '1')
 
 # AandGarray = mergeAssistAndGoalData(Aarray, Garray)
+cAG = mergeCleanSheetToAssistAndGoalData(Aarray,Garray, CSarray)
+# csAssistGoalPrice = mergePriceToCSAssistAndGoalData(Aarray,Garray, CSarray,Parray )
 
-csAssistGoalPrice = mergePriceToCSAssistAndGoalData(Aarray,Garray, CSarray,Parray )
 
-
-# printDataFromArray(csAssistGoalPrice, 'header')
-# printDataFromArray(csAssistGoalPrice, 'rows')
+# printDataFromArray(CSarray, 'header')
+# printDataFromArray(CSarray, 'rows')

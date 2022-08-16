@@ -1,21 +1,21 @@
-Team,Opp,H/A,CS%,,,
-Man City,BOU,H,56%,,,
-Liverpool,CRY,H,49%,,,
-Wolves,FUL,H,36%,,,
-Arsenal,LEI,H,36%,,,
-West Ham,NFO,A,34%,,,
-Aston Villa,EVE,H,33%,,,
-Chelsea,TOT,H,31%,,,
-Brighton,NEW,H,31%,,,
-Southampton,LEE,H,28%,,,
-Man Utd,BRE,A,27%,,,
-Leeds,SOU,A,25%,,,
-Brentford,MUN,H,25%,,,
-Newcastle,BHA,A,21%,,,
-Everton,AVL,A,20%,,,
-Nott'm Forest,WHU,H,20%,,,
-Spurs,CHE,A,18%,,,
-Fulham,WOL,A,18%,,,
-Leicester,ARS,A,16%,,,
-Crystal Palace,LIV,A,6%,,,
-Bournemouth,MCI,A,4%,,,
+Team,Opp,H/A,CS%
+Spurs,FUL,H,46%
+Liverpool,EVE,A,44%
+Man City,AVL,A,42%
+Chelsea,WHU,H,38%
+Wolves,SOU,H,34%
+Newcastle,CRY,H,31%
+Brentford,LEE,H,31%
+Brighton,LEI,H,30%
+Nott'm Forest,BOU,H,29%
+Bournemouth,NFO,A,25%
+Man Utd,ARS,H,25%
+Arsenal,MUN,A,25%
+Leicester,BHA,A,22%
+Leeds,BRE,A,22%
+Crystal Palace,NEW,A,20%
+Southampton,WOL,A,19%
+West Ham,CHE,A,13%
+Aston Villa,MCI,H,10%
+Fulham,TOT,A,9%
+Everton,LIV,H,9%

@@ -15,6 +15,7 @@ e.g.:
 
 
 def getManagerPlayers(managerId, gw):
+    gw = str(gw)
     api = 'https://fantasy.premierleague.com/api/entry/' + managerId + '/event/'+ gw + '/picks/'
     response_API = requests.get(api)
     managerData = response_API.json()['picks']    
