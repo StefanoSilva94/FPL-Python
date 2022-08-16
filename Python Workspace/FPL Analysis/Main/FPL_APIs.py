@@ -15,6 +15,7 @@ e.g.:
 
 
 def getManagerPlayers(managerId, gw):
+    gw = str(gw)
     api = 'https://fantasy.premierleague.com/api/entry/' + managerId + '/event/'+ gw + '/picks/'
     response_API = requests.get(api)
     managerData = response_API.json()['picks']    
@@ -25,31 +26,32 @@ def getManagerPlayers(managerId, gw):
         playerInfo = data['element']
         squad.append(allPlayersDict[playerInfo])
         
-    
     return squad
+
+
 
 def createTeamsDict():
     teamKey = {
-        1:'Arsenal',
-        2:'Aston Villa',
-        3:'Bournemouth',
-        4:'Brentford',
-        5:'Brighton',
-        6:'Chelsea',
-        7:'Crystal Palace',
-        8:'Everton',
-        9:'Fulham',
-        10:'Leicester',
-        11:'Leeds',
-        12:'Liverpool',
-        13:'Man City',
-        14:'Man Utd',
-        15:'Newcastle',
-        16:"Nott'm Forest",
-        17:'Southampton',
-        18:'Spurs',
-        19:'West Ham',
-        20:'Wolves'
+        1:'ARS',
+        2:'AVL',
+        3:'BOU',
+        4:'BRE',
+        5:'BHA',
+        6:'CHE',
+        7:'CRY',
+        8:'EVE',
+        9:'FUL',
+        10:'LEI',
+        11:'LEE',
+        12:'LIV',
+        13:'MCI',
+        14:'MUN',
+        15:'NEW',
+        16:"NFO",
+        17:'SOU',
+        18:'TOT',
+        19:'WHU',
+        20:'WOL'
     } 
 
     return teamKey
@@ -93,6 +95,5 @@ def createPlayerIDDict():
     return playerKey
 
 
-getManagerPlayers('3632826','1')
-
+# a = getManagerPlayers('3632826','1')
 

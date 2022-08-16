@@ -7,10 +7,12 @@ Any functions that output data directly useful for the end user are stored in te
 @author: stefanosilva
 '''
 from Main import ReadCSV
+
 import math
+
+
 r = ReadCSV
 m = math
-
 '''
 def/gk = 4*CS
 mid = CS
@@ -294,6 +296,8 @@ def mergeSortedArrays(a,b):
          
     return out
 
+        
+
 
 '''
 countList is used because len(List) was not useful when counting 1D Lists
@@ -308,11 +312,52 @@ def countList(lst):
             count+= 1         
     return count
 
+'''
+this function looks at the header column of data and if your filter is present it will return only rows matching that value
+If filt = price it will only return players of that price or lower
+E.g.:
+filter on Position, wwith value = DEF
+'''
+def getDataByFilter(data, filt, value):
+    
+    header = data[0]
+    rows = data[1]
+    newRows = []
+    newRows.append(header)
+    newRows.append([])
+    
+    count = 0
+    # locate the postion of the filt col
+    for column in header:
+        if column.lower() != filt.lower():
+            count+=1
+        else:
+            break
+        
+    if filt.lower() == 'price' or filt.lower() == 'cost':
+        
+        for row in rows:
+            if float(row[count]) <= float(value):
 
-# a = addExpPtsToData('1')
-# r.printDataFromArray(a, 'header')
-# r.printDataFromArray(a, 'rows')
+                newRows[1].append(row)
+    else:
+        # if the value in row matches the input value add that row to newRow  
+        for row in rows:
+            if row[count].lower() == value.lower():
+                newRows[1].append(row)
+            
+  
+    return newRows
+    
+    
 
+
+# a = addPPMToData('4')
+# b = getDataByFilter(a,'position','Mid')
+# b = getDataByFilter(b,'Cost','5.0')
+# r.printDataFromArray(b, 'header')
+# r.printDataFromArray(b, 'rows')
+# print(b)
 
         
         

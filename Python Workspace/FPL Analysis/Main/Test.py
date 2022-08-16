@@ -3,6 +3,7 @@ Created on 7 Aug 2022
 
 @author: stefanosilva
 '''
+# import os
     
     
 def countList(lst):
@@ -12,7 +13,5 @@ def countList(lst):
             count+= 1         
     return count
     
-        
-
-for i in range(0,40,5):
-    print(i)
+a = [1,2,3,4,5]
+print(a[1:])

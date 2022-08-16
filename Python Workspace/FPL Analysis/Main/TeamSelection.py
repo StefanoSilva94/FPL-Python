@@ -21,7 +21,7 @@ from Main import ReadCSV
 from Main import FPL_APIs
 import math
 
-
+f = FPL_APIs
 d = DataTransformation
 r = ReadCSV
 m = math
@@ -172,20 +172,114 @@ that have a better ppm over the next 4 gameweeks at those players combine price 
 '''
 def recommendTransfers(numTransfers, gw):
     transfer = []
-    currentTeam  = FPL_APIs.getManagerPlayers('3632826', gw - 1)
+    currentTeam  = findExpPtsAndPPMForCurrentSquad('3632826', str(gw))[1:]
+    # get data over 4 week range
+    startGW = gw; endGW = gw + 3
+    data = getExpPtsOverMultGWs(startGW, endGW)
     if numTransfers == 1:
-        currentTeam = []
-    
+        for playerStats in currentTeam:
+            if playerStats[3] == 'GKP':
+                print("NAY IVERSON")
+                print('')
+                
+            else:
+                print(playerStats[0] + ' has expPts = ' + str(playerStats[4]) + ' over the next four gameweeks')
+                a = comparePlayer(playerStats, data)
+                if a == []:
+                    print('No player is expected to outperform ' + playerStats[0] + 
+                          ' that is within their price range ')
+                    print('')
+                else:
+                    print(a)
+                    print('')
+       
+        
     return transfer
 
+'''
+This will look at a player in my squads stats and compare to it players in data that are the same position 
+and same price or less that will outscore the player
+'''
+def comparePlayer(player, data):
+    cost = player[2]
+    pos = player[3]
+    expPts = player[4]
+    posData = d.getDataByFilter(data, 'Position', pos)
+    posAndCostData = d.getDataByFilter(posData, 'Cost', cost)
+    # print(posAndCostData[0])
 
-a = getExpPtsOverMultGWs(2,5)
+    transfers = []
+    
+    i = 0
+    while i < 5:
+        maxPlayer = getMaxPlayerByColumn(posAndCostData, 'expPts')[1]
+        posAndCostData = getMaxPlayerByColumn(posAndCostData, 'expPts')[0]
+        
+        maxPlayerExpPts = maxPlayer[5]
+    
+        if maxPlayerExpPts > expPts:
+            transfers.append(maxPlayer)
+            i+=1
+        else:
+            return transfers
+        
+    return transfers
 
-for i in range (0,10):
-    b = getMaxPlayerByColumn(a, 'exppts')
-    a = b[0]
-    player = b[1]
-    print(player)
+'''
+Use data from 4 future gws. E.g.:
+Assume most recent gameweek is input. 
+If gw = 1, we want to find the expPts and PPM from gw2 - g4 (inclusive)
+Add this for each player in current squad
+Squad contains an array that holds the name and team of a player in the managers squad for the specified gameweek
+Player represents each element of squad
+
+'''
+def findExpPtsAndPPMForCurrentSquad(managerId, gw):
+    # Returns an array containing [name, team]
+    squad = f.getManagerPlayers(managerId,int(gw) - 1)
+    '''
+    squad = [[Ward, LEI],...]
+    '''
+    squadStats = []
+    expDataOverFourGWs = getExpPtsOverMultGWs(int(gw), int(gw) + 3)
+    squadStats.append(['Name', 'Team', 'Cost', 'Position', 'ExpPts', 'PPM']) # Adding header
+    
+    playersFound = 0
+    for row in expDataOverFourGWs[1]:
+        if playersFound == 14: # If all players are found end the loop
+            break
+        else:
+            name1 = row[1]
+            team1 = row[2]
+    
+            for player in squad:
+                name2 = player[0]
+                team2 = player[1]
+                if name1 == name2 and team1 == team2: # Check if player is in our squad
+                    ''' 
+                    player = [name, team]
+                    row[3:] [Cost, Position, ExpPts, PPM]
+                    player = [Name, Team, Cost, Position, ExpPts, PPM]
+                    '''
+                    player+=row[3:] 
+                    squadStats.append(player) 
+                    playersFound+=1
+    return squadStats
+    
+    
+# recommendTransfers(1,3)    
+a = getExpPtsOverMultGWs(1,4)
+gkp = d.getDataByFilter(a,'position','GKP'); maxG =[]
+defender = d.getDataByFilter(a,'position','def'); maxD = []
+mid = d.getDataByFilter(a,'position','Mid'); maxM = []
+fwd = d.getDataByFilter(a,'position','fwd'); maxF = []
 
 
-
+for i in range(0,5):
+    maxG.append(getMaxPlayerByColumn(gkp, 'ppm')[1])
+    maxD.append(getMaxPlayerByColumn(defender, 'ppm')[1])
+    maxM.append(getMaxPlayerByColumn(mid, 'ppm')[1])
+    maxF.append(getMaxPlayerByColumn(fwd, 'ppm')[1])
+    
+    
+print(maxF[2])
