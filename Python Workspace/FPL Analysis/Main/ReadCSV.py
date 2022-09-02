@@ -77,6 +77,8 @@ def getProbabilityData(data, gw):
         newData = addGameweekToArray(newData, gw)
     elif data == 'Price':
         newData = getDataFromCSV('Probability Data/'+data+' Data/CSV/Player Prices.csv')
+    elif data == 'Minutes':
+        newData = getDataFromCSV('Probability Data/'+data+' Data/CSV/minutes.csv')
         
     else:
         newData = getDataFromCSV('Probability Data/'+data+' Data/CSV/GW'+gw+'.csv')
@@ -175,14 +177,15 @@ def mergeCleanSheetToAssistAndGoalData(aArray, gArray, csArray):
     
     return csAssistGoal
 
-# This adds the price and position for each player to the assist, goals and cleansheet array
-def mergePriceToCSAssistAndGoalData(aArray, gArray, csArray, pArray):
+# This adds the price, position and minutes for each player to the assist, goals and cleansheet array
+def mergePriceAndMinutesToCSAssistAndGoalData(aArray, gArray, csArray, pArray, mArray):
     
     data = mergeCleanSheetToAssistAndGoalData(aArray, gArray, csArray)
     
     # Add price and pos to and header
     data[0].append(pArray[0][3])
     data[0].append(pArray[0][2])
+    data[0].append("AvgMins")
     
     l = len(data[1])
     
@@ -195,9 +198,11 @@ def mergePriceToCSAssistAndGoalData(aArray, gArray, csArray, pArray):
         # Find the cleansheet odds for that team
         price = getPlayerPositionAndPriceFromName(pArray,name,team)[0]
         pos = getPlayerPositionAndPriceFromName(pArray,name,team)[1]
+        avgMins = getPlayerAvgMinutesFromName(mArray, name, team)
 
         data[1][i].append(price)   
         data[1][i].append(pos) 
+        data[1][i].append(avgMins)
         
     return data
 
@@ -280,26 +285,54 @@ def getPlayerPositionAndPriceFromName(priceData, name1, team1):
         elif lastName == name2 and team1 == team2:
             break
 
-
-    price = rows[i-1][3]
-    pos = rows[i-1][2]
-    
-    
-    # print(name1);print(name2);print(price);print(pos)
-    
-    priceAndPos = (price, pos)
+    # If name is found
+    if i < len(priceData[1]):
+        
+        price = rows[i-1][3]
+        pos = rows[i-1][2]
+        
+        priceAndPos = (price, pos)
+    # If name is not on list   
+    else:
+        priceAndPos = (100, 'N/A')
     
     return priceAndPos
 
-Aarray = getProbabilityData('Assist', '3')
-Garray = getProbabilityData('Goal', '3')
-CSarray = getProbabilityData('Cleansheet', '3')
-Parray = getProbabilityData('Price', '1')
+def getPlayerAvgMinutesFromName(minutesData, name1, team1):
+    rows = minutesData[1]
+    name2 = ''
+    team2 = ''
+    names = name1.split(" ")
+    lastName = names[-1]
 
-# AandGarray = mergeAssistAndGoalData(Aarray, Garray)
-cAG = mergeCleanSheetToAssistAndGoalData(Aarray,Garray, CSarray)
-# csAssistGoalPrice = mergePriceToCSAssistAndGoalData(Aarray,Garray, CSarray,Parray )
+    i = 0
+    while i < len(minutesData[1]):
+        # Assign name2 = name in the ith row
+        
+        name2 = rows[i][0] 
+        team2 = rows[i][1] 
+        i+=1
+         
+        if name1 == name2 and team1 == team2:
+            break
+        # specific case needed since Bryan Gil is named differently in different spreadsheets
+        elif name1 == 'Bryan Gil' and name2 == 'Bryan' and team2 == 'TOT':
+            break
+        elif lastName == name2 and team1 == team2:
+            break
 
 
-# printDataFromArray(CSarray, 'header')
-# printDataFromArray(CSarray, 'rows')
+    avgMins = rows[i-1][2]
+    
+    return avgMins
+
+Aarray = getProbabilityData('Assist', '7')
+Garray = getProbabilityData('Goal', '7')
+CSarray = getProbabilityData('Cleansheet', '7')
+Parray = getProbabilityData('Price', '7')
+Marray = getProbabilityData('Minutes', '7')
+
+a = mergePriceAndMinutesToCSAssistAndGoalData(Aarray, Garray, CSarray, Parray, Marray)
+print(a)
+# printDataFromArray(Garray,'header')
+# printDataFromArray(Garray,'rows')

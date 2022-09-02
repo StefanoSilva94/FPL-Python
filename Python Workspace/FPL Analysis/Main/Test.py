@@ -1,17 +1,13 @@
-'''
-Created on 7 Aug 2022
+import os
+import re
 
-@author: stefanosilva
-'''
-# import os
-    
-    
-def countList(lst):
-    count = 0
-    for el in lst:
-        if type(el)== type([]):
-            count+= 1         
-    return count
-    
-a = [1,2,3,4,5]
-print(a[1:])
+file = "TRUVL_SFTTRA_BKENGB_R00012-220421_437901-0"
+# WRITE FILE AS A REGEX: [A-Z]+_[A-Z]+_[A-Z]+_
+
+y = re.findall("[0-9]{6}", file)[-1]
+y = '_' + str(int(y) + 1)
+file = re.sub("_[0-9]{6}", y, file)
+
+a = "Chelsea FC"
+b = re.sub("e", "9",a,-1)
+print(b)
