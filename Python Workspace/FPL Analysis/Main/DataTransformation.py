@@ -41,8 +41,16 @@ def addExpPtsToData(gw):
         g = row[5]
         cs = row[6]
         pos = row[8]
+        avgMins = row[9]
+        
+        # Want to penalise players that dont start games
+        if float(avgMins) < 60:
+            multiplier = float(avgMins)/90
+        else: 
+            multiplier = 1
+
      
-        expPts = cleanSheetPts(pos,cs) + assistPts(a) + goalPts(pos,g) + 2
+        expPts = (cleanSheetPts(pos,cs) + assistPts(a) + goalPts(pos,g) + 2) * multiplier
         row.append(expPts)
 
     return data
@@ -71,8 +79,9 @@ def getGameweekData(gw):
     a = r.getProbabilityData('Assist', gw)
     g = r.getProbabilityData('Goal', gw)
     p = r.getProbabilityData('Price', gw)
+    m = r.getProbabilityData('Minutes', gw)
     
-    data = r.mergePriceToCSAssistAndGoalData(a, g, cs, p)
+    data = r.mergePriceAndMinutesToCSAssistAndGoalData(a, g, cs, p, m)
     
     return data
 
@@ -351,10 +360,9 @@ def getDataByFilter(data, filt, value):
     
     
 
-
+b = getGameweekData('7')
 # a = addPPMToData('4')
 # b = getDataByFilter(a,'position','Mid')
-# b = getDataByFilter(b,'Cost','5.0')
 # r.printDataFromArray(b, 'header')
 # r.printDataFromArray(b, 'rows')
 # print(b)

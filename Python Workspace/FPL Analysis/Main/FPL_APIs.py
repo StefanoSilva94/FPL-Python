@@ -4,6 +4,8 @@ Use this page to get data directly from FPL using publicly available APIs
 @author: stefanosilva
 '''
 import requests
+import time
+
 
 
 '''
@@ -57,6 +59,10 @@ def createTeamsDict():
     return teamKey
     
 
+'''
+Returns a list, each element of the list contains [player name, team, ID]
+Every player in the game is contained in the list
+'''
 def getAllPlayerData():
     response_API = requests.get("https://fantasy.premierleague.com/api/bootstrap-static/")
     data = response_API.json()['elements']
@@ -67,7 +73,9 @@ def getAllPlayerData():
         p.append(data[i]['web_name'])
         teamID = (data[i]['team'])
         p.append(teamKey[teamID])
-        p.append(data[i]['id'])
+        elementID = data[i]['id']
+        p.append(elementID)
+        # p.append(getPlayerMinutes(str(elementID)))
         players.append(p)
         
           
@@ -95,5 +103,57 @@ def createPlayerIDDict():
     return playerKey
 
 
+'''
+Takes player ID as an input and works out the average minutes per game for this player over a maximum of five games
+'''
+def getPlayerMinutes(element):
+    
+    # keep looping until no more APIs can be found. 
+    # j is the gameweek index
+    i = 0
+    j = 0 
+    minutes = 0
+    
+    # Data from 5 matches is needed at maximum, if less than 5 games have been played return avaerage minutes
+    while i < 5:
+        try:
+            playerDetailsAPI = 'https://fantasy.premierleague.com/api/element-summary/'+ element +'/'
+            response_API = requests.get(playerDetailsAPI)
+            data = response_API.json()['history']
+            minutes = minutes + data[j]['minutes']
+            j+=1
+            i+=1
+            
+        except:
+                # cant divide by 0 so make j non-zero
+                if j ==0:
+                    j+=1
+                    minutes = minutes/j
+                    return minutes
+                else:
+                    minutes = minutes/j
+                    return minutes
+                    
+    return minutes
+
+
+def getAllPlayersAvgMinutes():
+    playerData = getAllPlayerData()
+    for player in playerData:
+        plID = player[2]
+        mins = getPlayerMinutes(str(plID))
+        player.append(mins)
+        player.pop(2)
+        # Adding token 1 to the start of each element in list so that createCSVDataSheets takes consistent format for all lists
+        player.insert(0,1)
+        # print(player)
+    return playerData
+
 # a = getManagerPlayers('3632826','1')
+
+a = getAllPlayerData()
+print(a)
+
+
+
 

@@ -129,7 +129,7 @@ def getExpPtsOverMultGWs(startGW, endGW):
         if oldName != name or oldTeam != team:
             cost = data[i][7]
             position = data[i][8]
-            expPts = data[i][9]
+            expPts = data[i][10]
             
             row = [gwks, name, team, cost, position, expPts]
             value = row[5]/float(row[3])
@@ -146,7 +146,7 @@ def getExpPtsOverMultGWs(startGW, endGW):
             Add the expPts to row[5] to get the cumulative points over multiple gameweeks
             '''  
         else:
-            row[5] = row[5] + data[i][9] #Add expPts
+            row[5] = row[5] + data[i][10] #Add expPts
             row[6] = row[5]/float(row[3])
             i+=1
             
@@ -199,6 +199,8 @@ def recommendTransfers(numTransfers, gw):
 '''
 This will look at a player in my squads stats and compare to it players in data that are the same position 
 and same price or less that will outscore the player
+It will account for how much money the player has in the bank when comparing players. E.g.:
+sancho = (£7.5, mid) and £1.5 in the bank - will compare to players (<= £9, mid)
 '''
 def comparePlayer(player, data):
     cost = player[2]
@@ -267,19 +269,8 @@ def findExpPtsAndPPMForCurrentSquad(managerId, gw):
     return squadStats
     
     
-# recommendTransfers(1,3)    
-a = getExpPtsOverMultGWs(1,4)
-gkp = d.getDataByFilter(a,'position','GKP'); maxG =[]
-defender = d.getDataByFilter(a,'position','def'); maxD = []
-mid = d.getDataByFilter(a,'position','Mid'); maxM = []
-fwd = d.getDataByFilter(a,'position','fwd'); maxF = []
+recommendTransfers(1,6)    
+# a = getExpPtsOverMultGWs(4,6)
+# r.printDataFromArray(a, 'header')
+# r.printDataFromArray(a, 'rows')
 
-
-for i in range(0,5):
-    maxG.append(getMaxPlayerByColumn(gkp, 'ppm')[1])
-    maxD.append(getMaxPlayerByColumn(defender, 'ppm')[1])
-    maxM.append(getMaxPlayerByColumn(mid, 'ppm')[1])
-    maxF.append(getMaxPlayerByColumn(fwd, 'ppm')[1])
-    
-    
-print(maxF[2])
