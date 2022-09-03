@@ -149,7 +149,51 @@ def getAllPlayersAvgMinutes():
         # print(player)
     return playerData
 
-# a = getManagerPlayers('3632826','1')
+
+def getPlayerPositionAndPrice():
+    teamDict = createTeamsDict()
+    allPlayersDict = createPlayerIDDict()
+    api = 'https://fantasy.premierleague.com/api/bootstrap-static/'
+    response_API = requests.get(api)
+    elements = response_API.json()["elements"]
+    data = []
+    i = 0
+    for element in elements:
+        row = []
+        name = response_API.json()["elements"][i]["second_name"]
+        price = response_API.json()["elements"][i]["now_cost"]
+        teamID = response_API.json()["elements"][i]['team']
+        posID = response_API.json()["elements"][i]['element_type']
+        pos = []
+        if posID == 1:
+            pos = 'GKP'
+        elif posID == 2:
+            pos = 'DEF'
+        elif posID == 3:
+            pos = 'MID'
+        elif posID == 4:
+            pos = 'FWD'
+            
+        team = teamDict[teamID]
+        i+=1;
+        row.append(name)
+        row.append(team)
+        row.append(pos)
+        row.append(price/10)
+        print(row)
+        data.append(row)
+
+    return data
+
+
+a = getPlayerPositionAndPrice()
+# print(a)
+    
+# for element in t:
+#     print(element)
+    # print(a[element])
+
+# print(a["elements"])
 
 a = getAllPlayerData()
 print(a)

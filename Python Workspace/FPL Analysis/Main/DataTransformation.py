@@ -17,7 +17,6 @@ m = math
 def/gk = 4*CS
 mid = CS
 for = 0
-
 '''
 '''This is used to get all the player data in a 2d list for a specified gameweek
 It contains extra columns that aren't needed in the final view,d.g.:
@@ -366,6 +365,3 @@ b = getGameweekData('7')
 # r.printDataFromArray(b, 'header')
 # r.printDataFromArray(b, 'rows')
 # print(b)
-
-        
-        

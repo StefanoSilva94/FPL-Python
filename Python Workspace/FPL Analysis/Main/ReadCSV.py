@@ -258,9 +258,7 @@ Rúben Vinagre -> Vinagre
 Daniel Iversen -> Iversen
 Bryan Gil -> Bryan
 All other players are like for like name1 = name2
-
 Special elif clause for Bryan Gil, othere special cases use split(" ") to get their last name
-
 '''
 def getPlayerPositionAndPriceFromName(priceData, name1, team1):
     rows = priceData[1]

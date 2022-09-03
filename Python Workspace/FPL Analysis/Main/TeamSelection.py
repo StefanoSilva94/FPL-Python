@@ -12,7 +12,6 @@ i) getExpPtsOverMultGWs(startGW, endGW) is used to get a dataset of each players
 that is sorted by Name alphabetically
 ii) getMaxPlayerByColumn(data, column) to get the player with the most expected points/ppm that gameweek rangd. 
 It also returns data with the row for the max player removed
-
 @author: stefanosilva
 '''
 
@@ -168,7 +167,6 @@ if numTransfers = 1, then it will look at the player with the lowest ppm and ret
 that have a better ppm over the next 4 gameweeks at the players price or less and players position
 if numTransfers = 2, then it will look at the 2 player with the lowest ppm and return all players 
 that have a better ppm over the next 4 gameweeks at those players combine price in their positions
-
 '''
 def recommendTransfers(numTransfers, gw):
     transfer = []
@@ -234,7 +232,6 @@ If gw = 1, we want to find the expPts and PPM from gw2 - g4 (inclusive)
 Add this for each player in current squad
 Squad contains an array that holds the name and team of a player in the managers squad for the specified gameweek
 Player represents each element of squad
-
 '''
 def findExpPtsAndPPMForCurrentSquad(managerId, gw):
     # Returns an array containing [name, team]

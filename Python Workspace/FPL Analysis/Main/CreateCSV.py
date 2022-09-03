@@ -1,6 +1,5 @@
 '''
 Created on 13 Aug 2022
-
 @author: stefanosilva
 '''
 import csv

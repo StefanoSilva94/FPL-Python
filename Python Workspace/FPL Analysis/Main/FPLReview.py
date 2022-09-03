@@ -26,7 +26,6 @@ def closeBrowser(driver):
  
 '''    
 Returns a list contain all data for each gw that is available
-
 returns a mult-d list. Each list will contain the cleansheet/assist/goal data for a gameweek. E.g.
 [[gw1CSData],...,[gw5CSData]]
 gw1CSData = [['Man City', 'BOU', 'H', '56%'],...,["Nott'm Forest", 'WHU', 'H', '20%']]
@@ -126,5 +125,3 @@ def getAllProbabilityData():
 
 # a = getAllProbabilityData()
 # print(a)
-
-
